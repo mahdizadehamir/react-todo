@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-
+import "./App.css";
+import TodoTitle from "./TodoTitle";
+import Addtask  from "./Addtask";
+import TaskList  from "./TaskList";
+import { useState } from "react";
 function App() {
+  const taskList = JSON.parse(localStorage.getItem("list") || "[]");
+  const [taskListState, setTaskListState] = useState(taskList);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App  h-screen container mx-auto ">
+      <TodoTitle />
+      <Addtask taskListState={taskListState} setTaskListState={setTaskListState} />
+      <TaskList taskListState={taskListState} />
     </div>
   );
-}
+};
 
 export default App;
