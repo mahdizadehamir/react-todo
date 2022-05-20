@@ -7,10 +7,10 @@ function App() {
   const taskList = JSON.parse(localStorage.getItem("list") || "[]");
   const [taskListState, setTaskListState] = useState(taskList);
   return (
-    <div className="App  h-screen container mx-auto ">
+    <div className="App h-screen container mx-auto overflow-y-scroll ">
       <TodoTitle />
       <Addtask taskListState={taskListState} setTaskListState={setTaskListState} />
-      <TaskList taskListState={taskListState} />
+      <TaskList setTaskListState={setTaskListState} taskListState={taskListState} />
     </div>
   );
 };
