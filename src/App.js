@@ -1,18 +1,30 @@
 import "./App.css";
 import TodoTitle from "./TodoTitle";
-import Addtask  from "./Addtask";
-import TaskList  from "./TaskList";
+import Addtask from "./Addtask";
+import TaskList from "./TaskList";
+import Alert from "./Alert";
 import { useState } from "react";
 function App() {
-  const taskList = JSON.parse(localStorage.getItem("list") || "[]");
-  const [taskListState, setTaskListState] = useState(taskList);
+  const [taskListState, setTaskListState] = useState(
+    JSON.parse(localStorage.getItem("list") || null)
+  );
+  const [showAlert, setShowAlert] = useState("hidden");
   return (
-    <div className="App h-screen container mx-auto overflow-y-scroll ">
+    <div className="App h-screen container mx-auto  ">
       <TodoTitle />
-      <Addtask taskListState={taskListState} setTaskListState={setTaskListState} />
-      <TaskList setTaskListState={setTaskListState} taskListState={taskListState} />
+      <Addtask
+        setShowAlert={setShowAlert}
+        taskListState={taskListState}
+        setTaskListState={setTaskListState}
+      />
+      <TaskList
+        setShowAlert={setShowAlert}
+        setTaskListState={setTaskListState}
+        taskListState={taskListState}
+      />
+      <Alert showAlert={showAlert} />
     </div>
   );
-};
+}
 
 export default App;

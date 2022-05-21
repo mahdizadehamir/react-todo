@@ -1,15 +1,28 @@
 const Addtask = (props) => {
-  const handleAddTask = (e) => {
+  const handleAddTask = () => {
     const val = document.getElementById("add-task").value;
-    localStorage.setItem("list", JSON.stringify([...props.taskListState,val]));
-    props.setTaskListState([...props.taskListState,val]);
-    document.getElementById("add-task").value = "";
-    console.log(props.taskListState);
+    if (!props.taskListState.includes(val)) {
+      localStorage.setItem(
+        "list",
+        JSON.stringify([...props.taskListState, val])
+      );
+      props.setTaskListState([...props.taskListState, val]);
+      document.getElementById("add-task").value = "";
+      console.log(props.taskListState);
+    }
+    else {
+      props.setShowAlert('block')
+      setTimeout(() => {
+      props.setShowAlert('hidden')
+      }, 3000);
+      
+    }
   };
   return (
     <div className="inputHolder mx-auto">
       <div className="flex flex-row justify-center mt-8">
         <input
+          required
           type="text"
           id="add-task"
           placeholder="add a todo"
