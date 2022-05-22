@@ -2,6 +2,8 @@ import { FaRegEdit } from "react-icons/fa";
 
 const TaskList = (props) => {
   const deleteTask = (index) => {
+    document.getElementById(index).classList.add("animate-fade-out-down");
+    setTimeout(() => {
     const filterItems = props.taskListState.filter(
       (task) => props.taskListState.indexOf(task) !== index
     );
@@ -9,9 +11,17 @@ const TaskList = (props) => {
     localStorage.removeItem("list");
     localStorage.setItem("list", JSON.stringify(filterItems));
     console.log(index);
+    }, 500);
   };
   const handleEdit = (index) => {
     const val = document.getElementById("edited-task" + index).value;
+    if (val === "") {
+      props.setEmptyAlert("block");
+      setTimeout(() => {
+        props.setEmptyAlert("hidden");
+      }, 3000);
+      return
+    } 
     if (!props.taskListState.includes(val)) {
       const newArray = [...props.taskListState];
       newArray[index] = val;
@@ -31,10 +41,11 @@ const TaskList = (props) => {
     <div className="task-list flex flex-col justify-center items-center mt-16">
       {props.taskListState.map((task, index) => (
         <div
-          className={`flex flex-row justify-between  bg-gray-900 mb-4  font-sans text-xl  shadow-lg shadow-gray-900 p-4 w-80 break-words ${
+          className={`flex flex-row justify-between animate-fade-in-down   bg-gray-900 mb-4  font-sans text-xl  shadow-lg shadow-gray-900 p-4 w-80 break-words tasks ${
             "task" + "-" + index
           }`}
           key={index}
+          id={index}
         >
           <p className="break-words w-44">{task}</p>
           <button
