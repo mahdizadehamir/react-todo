@@ -1,6 +1,7 @@
 import { FaRegEdit } from "react-icons/fa";
 
 const TaskList = (props) => {
+	/*define deleteTask function */
   const deleteTask = (index) => {
     document.getElementById(index).classList.add("animate-fade-out-down");
     setTimeout(() => {
@@ -13,6 +14,7 @@ const TaskList = (props) => {
     console.log(index);
     }, 500);
   };
+	  /*define editTask function */
   const handleEdit = (index) => {
     const val = document.getElementById("edited-task" + index).value;
     if (val === "") {
@@ -39,7 +41,8 @@ const TaskList = (props) => {
   };
   return (
     <div className="task-list flex flex-col justify-center items-center mt-16">
-      {props.taskListState.map((task, index) => (
+	{props.taskListState ? 
+      props.taskListState.map((task, index) => (
         <div
           className={`flex flex-row justify-between animate-fade-in-down   bg-gray-900 mb-4  font-sans text-xl  shadow-lg shadow-gray-900 p-4 w-80 break-words tasks ${
             "task" + "-" + index
@@ -103,7 +106,7 @@ const TaskList = (props) => {
           </div>
           {/* modal */}
         </div>
-      ))}
+	  )) : <div>No Tasks</div>}
     </div>
   );
 };

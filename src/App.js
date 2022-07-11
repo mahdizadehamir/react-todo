@@ -7,7 +7,7 @@ import { useState } from "react";
 import EmptyAlert from "./EmptyAlert";
 function App() {
   const [taskListState, setTaskListState] = useState(
-    JSON.parse(localStorage.getItem("list") || null)
+    JSON.parse(localStorage.getItem("list") || "[]")
   );
   const [showAlert, setShowAlert] = useState("hidden");
   const [emptyAlert, setEmptyAlert] = useState("hidden");
