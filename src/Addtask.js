@@ -29,7 +29,6 @@ const [taskValue,setTaskValue] = useState('');
   return (
     <div className="inputHolder mx-auto">
       <div className="  flex flex-row justify-center mt-8">
-		<form onSubmit={handleAddTask}>
         <input
 		  onChange={(e) => setTaskValue(e.target.value)}
           required
@@ -39,12 +38,12 @@ const [taskValue,setTaskValue] = useState('');
           className=" input input-bordered border-primary focus:border-yellow-500   w-full max-w-xs rounded-none"
         />
         <button
+			onClick={handleAddTask}
 	    	type="submit"
           className="btn btn-active btn-primary rounded-none"
         >
           Add
         </button>
-		</form>
       </div>
     </div>
   );
